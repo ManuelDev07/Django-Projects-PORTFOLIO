@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+    <h2> {{title}} </h2>
+
+    {{create.errors}}
+
+    <div>
+        <form method="POST" action=''>
+            {% csrf_token %}
+            
+            {% if messages %}
+                {% for i in messages %}
+                    <div> 
+                        {{i}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <p> {{create.first_name.label}}</p>
+            <p> {{create.first_name}}</p>
+            <p> {{create.username.label}}</p>
+            <p> {{create.username}}</p>
+            <p> {{create.email.label}}</p>
+            <p> {{create.email}}</p>
+            <p> {{create.password1.label}}</p>
+            <p> {{create.password1}}</p>
+            <p> {{create.password2.label}}</p>
+            <p> {{create.password2}}</p>
+            
+            <input type="submit" value="Registrar" />
+
+        </form>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+    <h2> {{title}} </h2>
+
+    {% for i in list %}
+    <ul>
+        <li>
+            <a href='{% url "borrar-nota" i.id %}'> Borrar Nota </a> 
+            <h5>(Al borrar una nota será irreversible dicha acción.) </h5>
+            <h3> {{i.title}} </h3>
+            <p> {{i.content}} </p>
+            <p> {{i.created_at}} </p>
+        </li>
+    </ul>
+
+    {% endfor %}
+
+{% endblock content %}

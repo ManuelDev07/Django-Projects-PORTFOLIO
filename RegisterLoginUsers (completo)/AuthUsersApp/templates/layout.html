@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <link rel="shortcut icon" href="{% static 'img/3363554_secure_gdpr_user_data_icon.ico' %}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+    <title>Manejo de Usuarios | {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <!--title-->
+    <h1>Manejo de Usuario WebPage</h1>
+    
+    <!--Users Menu-->
+<div id='menu'>    
+    <ul>
+        <!--Si está logeado solo mostrará "Cerrar Sesión"-->
+        {% if user.email %}
+            <li>
+                <a href=" {% url 'salir' %} "> Cerrar Sesión </a>
+            </li>
+        {% else %} <!--Caso contrario se le muestra para que pueda ingresar a la página-->
+            <li>
+                <a href=" {%  url 'registrar' %} "> Registrarme </a>
+            </li>
+            <li>
+                <a href="{%  url 'ingresar' %}"> Iniciar Sesión </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+    <!--Content-->
+    <div id='main'>
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    <!--Footer-->
+    <footer>
+        <p>Creado y Diseñado por Manuel Bayona &copy;</p>
+        <p>25/07/2022</p>
+    </footer>
+
+</body>
+</html>

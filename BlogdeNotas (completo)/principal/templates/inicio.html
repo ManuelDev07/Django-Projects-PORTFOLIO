@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+    <h2> {{title}} </h2>
+
+    {% if messages %} 
+        {% for i in messages %}
+            <div>
+                {{i}}            
+            </div>
+        {% endfor %} 
+    {% endif %}
+
+
+    {% if request.user.first_name %}
+        Bienvenid@ {{request.user.first_name}}!   
+    {% else %}
+        Debes Iniciar Sesión para empezar a guardar y/o administrar tus notas
+    {% endif %}
+
+{% endblock %}
+
+
+
