@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}Registarme{% endblock %}
+
+{% block content %}
+
+    <h2>Registro de Usuario:</h2>
+
+    <!--Mensaje para registro erróneo-->
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!--Formulario de Registro de Usuario-->
+    <form method='POST', action=''>
+        {% csrf_token %}
+
+        <!--Campos del formulario-->
+        <p>{{user_form.username.label}}</p>
+        <p>{{user_form.username}}</p>
+        <p>{{user_form.usermail.label}}</p>
+        <p>{{user_form.usermail}}</p>
+        <p>{{user_form.password1.label}}</p>
+        <p>{{user_form.password1}}</p>
+        <p>{{user_form.password2.label}}</p>
+        <p>{{user_form.password2}}</p>
+
+        <input type='submit' value='Registrarme' />
+    </form>
+    
+    <ol>
+        <strong>NOTA: </strong>
+        <li>150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_ . </li>
+        <li>Su contraseña NO puede asemejarse tanto a su otra información personal.</li>
+        <li>Su contraseña DEBE contener AL MENOS 8 caracteres.</li>
+        <li>Su contraseña NO puede ser una clave utilizada comúnmente.</li>
+        <li>Su contraseña NO puede ser completamente numérica.</li>
+    </ol>
+    
+{% endblock %}
