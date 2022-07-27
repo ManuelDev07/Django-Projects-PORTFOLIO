@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}Contáctame.{% endblock %}
+
+{% block content %}
+
+    <h2>Contacto:</h2>
+    <!--Mostrar mensaje para cuando el usuario envíe el mensaje-->
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+    <!---->
+
+    <!--Formulario de Contacto-->
+    <form action='/contact/' method='POST'> <!--El action es para redireccionar-->
+        {% csrf_token %}
+
+        <label for='subject'>Asunto:</label>
+        <input type='text' name='subject' placeholder='Asunto...' required id='subject'/>
+        <br>
+        <label for='email'>Correo Electrónico:</label>
+        <input type='text' name='email' placeholder='Correo Electrónico...' required id='email'/>
+        <br>
+        <label for='message'>Mensaje:</label>
+        <textarea name='message' rows='5' cols='40' placeholder='Escribe el mensaje que quieras enviar...' required id='message'></textarea>
+        
+        <input type='submit' value='Enviar' />
+    </form>
+    <!---->
+
+{% endblock %}
