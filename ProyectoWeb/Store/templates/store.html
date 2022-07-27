@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tienda{% endblock %}
+
+{% block content %}
+    <!--Title-->
+    <h2>Tienda</h2>
+
+    <!--Mensaje para cuando el usuario realizó un pedido-->
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!--Menú Categorias de Productos-->
+    <h3>Categorias de Productos:</h3>
+    <ol>
+    {% for category in categories %}
+        <!--Para que me redireccione a una pagina con una categoria con su id especifico-->
+        <li><a href="{% url 'productos_de_una_categoria' category.id %}">{{category}}</a></li>
+    {% endfor %}
+    </ol>
+    <hr>
+
+    <!--Carrito de Compras (Se motrará si se ha iniciado sesión)-->
+    {% if user.username %}    
+        <div>        
+            {% comment "template del widget para el carrito de compras" %}{% endcomment %}
+            {% include 'widget/shoppingCartWidget.html' %}
+
+        </div>
+        <hr>
+    {% else %}
+        <p><strong>Debes Logearte para Realizar tus Compras</strong></p>
+    {% endif %}
+
+
+    <!--Listado de TODOS los Productos en la tienda-->
+    {% for product in products %}
+        <img src={{product.image.url}} width='150' height='150' />
+        <h4>{{product.name}}</h4>
+        <p><strong>Detalles del Producto:</strong> {{product.details}}</p>
+        
+        <!--Verifico si el producto se ha vendido o no-->
+        {% if product.sold == True %}
+            <p>❌ Producto <strong>NO</strong> Disponible ❌</p>
+        {% else %}
+            <p>✅ Producto Disponible ✅</p>
+        {% endif %}
+    
+        <p><strong>Categoría:</strong> {{product.categories}}</p>
+        <p><strong>Precio:</strong> {{product.price}}$</p>
+        <p>{{product}}</p>
+
+        <!--Botón para el carrito de compras-->
+        <div>   
+            {% comment "Se agrega al carrito con el id del producto" %}{% endcomment %}     
+            <a href=" {% url 'agregar-prod' product.id %} ">agregar al carrito</a>
+        </div>
+        
+        <br>
+        <br>
+    {% endfor %}
+
+{% endblock %}
