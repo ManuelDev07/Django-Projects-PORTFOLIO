@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}Mangas de {{authors}}{{genre}}{{demographies}}{% endblock %}
+
+{% block content %}
+
+{% if mangas %}
+
+    <div id='store-body'>
+
+        <!--Mangas List-->
+        <div id='mangas-body'>
+            <h3>MANGAS DISPONIBLES DE {{authors|upper}}{{genre|upper}}{{demographies|upper}}</h3>
+            
+            <div id='mangas-list'>    
+                {% for manga in mangas %}
+                    <div id='manga-card'>
+                        <h2>{{manga.name}}</h2>
+                        <p><a href={% url 'imagen' manga.slug %}><img src='{{manga.image.url}}' width='200' height='300' alt='portada'/></a></p>
+                        
+                        <p id='gen'><strong>Género(s):</strong> 
+                            {% for genre in manga.genre.all %}
+                                | <a href={% url 'detalle_genero' genre.slug %}>{{genre}}</a>
+                            {% endfor %}
+                        </p>
+                        
+                        <p id='demo'><strong>Demografía:</strong>
+                            {% for demography in manga.demography.all %}
+                                <a href={% url 'detalle_demografia' demography.slug %}>{{demography}}</a>
+                            {% endfor %}
+                        </p>
+
+                        <p id='author'><strong>Autor:</strong> <a href={% url 'author' manga.author.slug %}>{{manga.author}}</a>.</p>
+                        <p><strong>Año:</strong> {{manga.year}}.</p>
+                        
+                        <p><strong>Estado:</strong> 
+                            
+                            {% if manga.state %}
+                                En Curso.
+                            {% else %}
+                                Finalizado.
+                            {% endif %}
+
+                        </p>
+                        
+                        <p><strong>Precio:</strong> {{manga.price}}$.</p>
+                        
+                        <div id='info'><a href={% url 'manga' manga.slug %}><strong>Ver</strong></a></div>
+                        <div id='add-cart'><a href={% url 'agregar' manga.id %}><strong>Agregar al Carrito</strong></a></div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <div id='mangas-body'>
+        <h3>NO TENEMOS MANGAS DE {{authors|upper}}{{genre|upper}}{{demographies|upper}}</h3>
+    </div>
+{% endif %}
+
+{% endblock %}

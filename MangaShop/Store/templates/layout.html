@@ -1,0 +1,63 @@
+{% comment "se cargan los ficheros static" %}{% endcomment %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href=" {% static 'css\styles.css' %} ">
+    <link rel="shortcut icon" href=" {% static 'img\icon.ico' %} " type="image/x-icon">
+    <title>Manga Shop | {% block title %}{% endblock %} </title>
+</head>
+<body>
+    <div id="header">
+        <!--Title-->        
+        <div id='title'>
+            <h1><a href={% url 'inicio' %}>Manga Shop</a></h1>
+        </div>
+
+        <!--Search-->
+        <div id='search-bar'>
+            <form action='/search-manga/' method='GET'>
+                <input type="search" name='search' placeholder="Buscar Manga..." />
+                <input type="image" src= "{% static 'img\search.png' %}"  width='23' height='23'  value="Buscar">
+            </form>
+        </div>
+
+        <!--Cart Button-->
+        <div id='cart-button'>
+            <a href={% url 'carrito' %}><img src= "{% static 'img\cart-icon.png' %}" width='25' height='25' ></a>
+        </div>
+
+        <!--Users Menu-->
+        <div>
+            <ul class='menu-user'>
+
+                {% if user.username %}
+                    <li><img src={% static 'img\hand.gif' %} width='20' height='20' />Hola! {{user.username|upper}}</li>
+                    <li><a href={% url 'cerrar-sesion' %}>Cerrar Sesión</a></li>
+                {% else %}
+                    <li><a href={% url 'ingresar' %}>Ingresar</a></li>
+                    <li><a href={% url 'registrar' %}>Crear Cuenta</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+        
+    </div>
+
+    <!--Content-->
+    <div id="content">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>Creado y Diseñado por Manuel Bayona.</p>
+        <p>All rights reserved. &copy;</p>
+        <p>05/07/2022.</p>
+    </footer>
+
+</body>
+</html>

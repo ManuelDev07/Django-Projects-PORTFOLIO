@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <div id='store-body'>
+
+        <!--Genres Menu-->
+        <div id='genre-menu'>
+            <div id='genre-list'>
+                <h3>Géneros</h3>
+                <ul id='columns-list'>
+                    {% for genre in genres %}
+                        <li><a href={% url 'detalle_genero' genre.slug %}>{{genre}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!--Demography Menu-->
+        <div id='demography-menu'> 
+            <div id='demography-list'>
+                <h3>Demografías</h3>
+                <ul id='columns-list'>
+                    {% for demography in demographies %}
+                        <li><a href={% url 'detalle_demografia' demography.slug %}>{{demography}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div id='mangas-body'>
+
+            <!--Flash Message-->
+            {% if messages %}
+                {% for message in messages %}
+                    <div id='good-message'>{{message}}</div>
+                {% endfor %}
+            {% endif %}            
+
+            <!--Mangas List-->            
+            <h3>TODOS NUESTROS MANGAS DISPONIBLES</h3>
+            
+            <div id='mangas-list'>    
+                {% for manga in mangas_pages %}
+                    <div id='manga-card'>
+                        <h2>{{manga.name}}</h2>
+                        <p><a href={% url 'imagen' manga.slug %}><img src='{{manga.image.url}}' width='200' height='300' alt='portada'/></a></p>
+                        
+                        <p id='gen'><strong>Género(s):</strong> 
+                            {% for genre in manga.genre.all %}
+                                | <a href={% url 'detalle_genero' genre.slug %}>{{genre}}</a>
+                            {% endfor %}
+                        </p>
+                        
+                        <p id='demo'><strong>Demografía:</strong>
+                            {% for demography in manga.demography.all %}
+                                <a href={% url 'detalle_demografia' demography.slug %}>{{demography}}</a>
+                            {% endfor %}
+                        </p>
+
+                        <p><strong>Precio:</strong> {{manga.price}}$.</p>
+                        
+                        <div id='info'><a href={% url 'manga' manga.slug %}><strong>Ver</strong></a></div>
+                        <div id='add-cart'><a href={% url 'agregar' manga.id %}><strong>Agregar al Carrito</strong></a></div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <!--Sistema de Paginado-->
+        <div id='paginator'>
+            {% include 'widgets\pagination.html' %}
+        </div>    
+
+    </div>
+{% endblock %}
