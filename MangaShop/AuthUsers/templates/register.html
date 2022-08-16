@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}Crear Cuenta{% endblock %}
+
+{% block content %}
+
+    <!--Mensaje para Datos Erróneos-->
+    {% if messages %}
+        {% for message in messages %}
+            <div id='error-message'>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!--Title-->
+    <h2 id='register-login-title'>Crear Cuenta:</h2>
+
+    <!--Form-->
+    <div id='form-register-login'>
+        <form method='POST' action=''>
+            {% csrf_token %}
+            
+            <p>{{form.first_name.label}}</p>
+            {{form.first_name}}
+            <p>{{form.last_name.label}}</p>
+            {{form.last_name}}
+            <p>{{form.username.label}}</p>
+            {{form.username}}
+            <p>{{form.email.label}}</p>
+            {{form.email}}
+            <p>{{form.password1.label}}</p>
+            {{form.password1}}
+            <p>{{form.password2.label}}</p>
+            {{form.password2}}
+
+            <input type='submit' value='Registrarme'/>
+        </form>
+    </div>
+
+    <div id='instructions'>
+        <ol>
+            <strong>INSTRUCCIONES: </strong>
+            <li>150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_ . </li>
+            <li>Su contraseña NO puede asemejarse tanto a su otra información personal.</li>
+            <li>Su contraseña DEBE contener AL MENOS 8 caracteres.</li>
+            <li>Su contraseña NO puede ser una clave utilizada comúnmente.</li>
+            <li>Su contraseña NO puede ser completamente numérica.</li>
+        </ol>
+    </div>
+
+
+{% endblock %}
