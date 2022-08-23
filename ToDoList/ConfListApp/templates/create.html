@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}Nueva Tarea{% endblock %}
+
+{% block content %}
+
+    <h2>Nueva Tarea</h2>
+
+    <!--Mensaje de Error-->
+    {% if messages %}
+        {% for message in messages %}
+            <div id='error-message'>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div id='form-create'>
+        <form method='POST'>
+            {% csrf_token %}
+
+            <label>Crea un Título:</label> <br>
+            <input type='text' name='title' placeholder='Título...' /><br>
+            <label>¿Qué debes hacer?</label><br>
+            <input type='text' name='desc' placeholder='Descripción...' /><br>
+
+            <input type='submit' value='Guardar Tarea' />
+        </form>
+    </div>
+
+{% endblock %}

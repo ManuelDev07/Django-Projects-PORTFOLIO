@@ -1,0 +1,44 @@
+{% comment "se cargan los ficheros static" %}{% endcomment %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href=" {% static 'styles.css' %} ">
+    <link rel="shortcut icon" href=" {% static 'img\icon_page.ico' %} " type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
+    <title>To Do List | {% block title %}{% endblock %} </title>
+</head>
+<body>
+    <!--Title-->        
+    <div id='title'>
+        <h1>To Do List</h1>
+    </div>
+    
+    <!--Menú-->
+    <div id='menu'>
+        <ul>
+            <li><a href="{% url 'mis_tareas' %}">Sin Completar</a></li>
+            <li><a href="{% url 'tareas_eliminadas' %}">Eliminadas</a></li>
+            <li><a href="{% url 'tareas_completadas' %}">Completadas</a></li>
+        </ul>
+    </div>
+
+    <!--Content-->
+    <div id="content">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    <!--Footer-->
+    <footer>
+        <p>Creado y Diseñado por Manuel Bayona.</p>
+        <p>All rights reserved. &copy;</p>
+    </footer>
+
+</body>
+</html>

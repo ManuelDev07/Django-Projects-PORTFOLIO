@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tareas Eliminadas{% endblock %}
+
+{% block content %}
+    <!--Lista de Tareas-->
+    {% if tasks %}
+        <h3>Tienes {{tasks|length}} Eliminada(s)!</h3>
+
+        {% for task in tasks %}
+            <div id='task-content'>
+                <p>
+                    <strong>{{task|title}}</strong>
+    
+                   <!--Botones para eliminar-->
+                   <a id='delete' href="{% url 'perma_eliminar' task.id %}">Borrar para Siempre</a>
+                </p>                
+                <p>{{task.desc}}</p>     
+            </div>
+        {% endfor %}
+
+        {% else %}
+            <p id='empty'>No Hay Tareas Eliminadas! </p>
+    
+    {% endif %}
+
+{% endblock %}

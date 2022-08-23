@@ -1,0 +1,198 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    background-color: black;
+    border: white solid 2px;
+    padding: 6px;
+    color: white;
+    border-radius: 9px;
+}
+
+body{
+    background-color: rgb(173, 173, 173);
+}
+
+/*Title*/
+#title{
+    background-color: #148d8d;
+    padding: 25px;
+    text-align: center;
+    color: white;
+}
+/**/
+
+/*MENÚ*/
+#menu li{
+    list-style: none;
+    float: left;
+    padding-left: 9px;
+    padding-top: 5px;
+}
+
+#menu{
+    background-color: rgb(196, 196, 196);
+    padding: 12px;
+    height: 28px;
+    font-size: 20px;
+}
+
+#menu ul{
+    margin-left: 35%;
+}
+/**/
+
+/*CONTENT*/
+#content{
+    background-color: gray;
+    margin: 25px 10% 25px 10%;
+    padding: 18px;
+    border-radius: 9px;
+        font-size: 20px;
+}
+
+h3{
+    margin: 9px 0 12px 12px;
+}
+
+#create a{
+    margin: 25px 0 25px 85%;
+    border-radius: 9px;
+    border: rgb(0, 38, 252) 3px solid;
+    background-color: rgb(0, 13, 197);
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+#create a:hover{
+    background-color: rgb(0, 12, 175);
+}
+
+#task-content{
+    margin-left: 22px;
+    border: solid 3px lightgray;
+    padding: 12px;
+    border-radius: 9px;
+    margin-top: 9px;
+}
+
+#task-content p{
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+#complete{
+    border-radius: 9px;
+    border: rgb(1, 194, 1) 3px solid;
+    background-color: rgb(4, 170, 4);
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+#complete:hover{
+    background-color: rgb(3, 156, 3);
+    cursor: pointer;
+}
+
+#delete{
+    margin-left: 50%;
+    border-radius: 9px;
+    border: rgb(255, 47, 47) 3px solid;
+    background-color: rgb(233, 28, 1);
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+#delete:hover{
+    background-color: rgb(216, 25, 0);
+}
+
+#empty{
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+/**/
+
+/*FORMULARIO CREAR TAREA*/
+h2{
+    padding: 12px;
+}
+
+#form-create{
+    margin: 5px 10% 5px 10%;
+    font-size: 20px;
+}
+
+label{
+    padding-left: 9px;
+}
+
+input{
+    font-size: 20px;
+
+}
+
+input[type='text']{
+    border: solid black 2px;
+    border-radius: 9px;
+    padding: 7px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+input[type='text']:focus{
+    outline: none;
+}
+
+input[type='submit']{
+    border-radius: 9px;
+    border: rgb(1, 194, 1) 3px solid;
+    background-color: rgb(4, 170, 4);
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+input[type='submit']:hover{
+    background-color: rgb(3, 156, 3);
+    cursor: pointer;
+}
+/**/
+
+/*FOOTER*/
+footer{
+    background-color: #148d8d;
+    padding: 25px;
+    text-align: center;
+    text-decoration: underline black 2px;
+    color: white;
+}
+/**/
+
+/*MENSAJES*/
+#good-message{
+    background-color: rgb(0, 179, 0);
+    text-align: center;
+    padding: 25px;
+    margin: 25px;
+    border-radius: 12px;
+    color: white;
+}
+
+#error-message{
+    background-color: rgb(253, 0, 0);
+    text-align: center;
+    padding: 25px;
+    margin: 25px;
+    border-radius: 12px;
+    color: white;
+}
+/**/

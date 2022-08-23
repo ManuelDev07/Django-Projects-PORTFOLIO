@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}Mis Tareas{% endblock %}
+
+{% block content %}
+
+    <!--Mensaje-->
+    {% if message %}
+        {% for message in messages %}
+            <div id='good-message'>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!--Botón Crear Nota-->
+    <div id='create'>
+        <a href="{% url 'crear' %}">Nueva Tarea</a>
+    </div>
+
+    <!--Lista de Tareas-->
+    {% if tasks %}
+        <h3>Tienes {{tasks|length}} Pendiente(s)!</h3>
+
+        {% for task in tasks %}
+        <div id='task-content'>
+            <p>
+                <strong>{{task|title}}</strong>
+
+               <!--Botones para eliminar y completar-->
+               <a id='delete' href="{% url 'eliminar' task.id %}">Eliminar</a>
+               <a id='complete' href="{% url 'completar' task.id %}">Completar</a>            
+            </p>
+            <p>{{task.desc}}</p>
+            <p>{{task.created_at}}</p>
+        </div>
+        {% endfor %}
+    
+    {% else %}
+        <p id='empty'>No Tienes Tareas Pendientes! </p>
+    {% endif %}
+
+{% endblock %}
