@@ -1,1 +1,0 @@
-En esta carpeta se guardarán cada una de las imagenes que se suben en el Admin Panel, en un solo fichero, en la carpeta raíz del Proyecto. Además dentro de media se guardará una carpeta por app que use imágenes. TODO ESTO SE DEBE HACER PARA UN MEJOR ORDEN
