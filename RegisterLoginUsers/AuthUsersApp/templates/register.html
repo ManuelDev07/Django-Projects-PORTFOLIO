@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}Registarme{% endblock %}
+
+{% block content %}
+
+    <!--Title-->
+    <h2>Registrarme:</h2>
+    
+    <!--Message-->
+    {% if messages %}
+        {% for message in messages %}
+            <div id='message'>{{message}}<strong>{{user.username|upper}}</strong> !!!</div>
+        {% endfor %}
+    {% endif %}
+    
+    <!--Form-->
+    <form action='' method='POST'>
+        {% csrf_token %}
+
+        <p id='label'>{{form.username.label}}</p>
+        <p id='label'>{{form.username}}</p>
+        <p id='label'>{{form.first_name.label}}</p>
+        <p id='label'>{{form.first_name}}</p>
+        <p id='label'>{{form.last_name.label}}</p>
+        <p id='label'>{{form.last_name}}</p>
+        <p id='label'>{{form.email.label}}</p>
+        <p id='label'>{{form.email}}</p>
+        <p id='label'>{{form.password1.label}}</p>
+        <p id='label'>{{form.password1}}</p>
+        <p id='label'>{{form.password2.label}}</p>
+        <p id='label'>{{form.password2}}</p>
+
+        <!--Button-->
+        <input type='submit' value='Registrar' id='button'/>
+
+    </form>
+{% endblock %}
