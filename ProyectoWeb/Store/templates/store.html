@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tienda{% endblock %}
+
+{% block content %}
+    <!--Title-->
+    <h2>Tienda</h2>
+
+    <!--Mensaje para cuando el usuario realizó un pedido-->
+    <div id='message'>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class='grid'>    
+
+        <!--Menú Categorias de Productos-->
+        <div id='cart-category-menu'>
+            <h3>Categorias de Productos:</h3>
+            <ol>
+            {% for category in categories %}
+                <!--Para que me redireccione a una pagina con una categoria con su id especifico-->
+                <li><a href="{% url 'productos_de_una_categoria' category.id %}">{{category}}</a></li>
+            {% endfor %}
+            </ol>
+
+             <!--Carrito de Compras (Se motrará si se ha iniciado sesión)-->
+            {% if user.username %}    
+                <div id='cart'>        
+                    {% comment "template del widget para el carrito de compras" %}{% endcomment %}
+                    {% include 'widget/shoppingCartWidget.html' %}
+                </div>
+            {% else %}
+                <div id='cart'><p><strong>Debes Logearte para Realizar tus Compras</strong></p></div>
+            {% endif %}
+        </div>    
+
+        <!--Listado de TODOS los Productos en la tienda-->
+        <div id='products-list'>
+            {% for product in products %}
+                <img src={{product.image.url}} width='150' height='150' />
+                <h4>{{product.name}}</h4>
+                <p><strong>Detalles del Producto:</strong> {{product.details}}</p>
+                
+                <!--Verifico si el producto se ha vendido o no-->
+                {% if product.sold == True %}
+                    <p>❌ Producto <strong>NO</strong> Disponible ❌</p>
+                {% else %}
+                    <p>✅ Producto Disponible ✅</p>
+                {% endif %}
+            
+                <p><strong>Categoría:</strong> {{product.categories}}</p>
+                <p><strong>Precio:</strong> {{product.price}}$</p>
+                <p>{{product}}</p>
+
+                <!--Botón para el carrito de compras-->
+                <div>   
+                    {% comment "Se agrega al carrito con el id del producto" %}{% endcomment %}     
+                    <a href=" {% url 'agregar-prod' product.id %} " id='add-cart'>agregar al carrito</a>
+                </div>
+            {% endfor %}
+
+        </div>         
+
+    </div>
+
+{% endblock %}
