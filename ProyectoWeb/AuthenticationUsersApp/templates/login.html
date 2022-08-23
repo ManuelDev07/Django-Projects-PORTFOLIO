@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}Ingresar{% endblock %}
+
+{% block content %}
+
+    <h2>Login de Usuario:</h2>
+
+    <!--Mensaje para logeo erróneo-->
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!--Formulario de Login de Usuario-->
+    <form method='POST' >
+        {% csrf_token %}
+
+        <label for='username'>Nombre de Usuario:</label>
+        <input type='text' name='username' />
+        <label for='username'>Contraseña:</label>
+        <input type='password' name='passwrd' />
+
+        <input type='submit' value='Ingresar' />
+    </form>
+    
+{% endblock %}

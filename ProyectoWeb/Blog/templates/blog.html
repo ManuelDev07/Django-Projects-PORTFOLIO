@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+
+<h2>Blog</h2>
+
+<!--Categories-->
+<h3>Categorías Disponibles:</h3>
+<ol>
+    {% for category in categories %}
+        <!--Para que me redireccione a una pagina con categoria en x id-->
+        <li><a href="{% url 'pagina_categoria' category.id %}">{{category.name}}.</a></li>
+    {% endfor %}
+</ol>
+<hr>
+
+<!--Post-->
+{% for post in posts %}
+    <!--Por si el Post tiene imágenes-->
+    {% if post.image %}
+        <p><img src='{{post.image.url}}' width='400' height='300'  /></p>
+    {% endif %}
+
+    <h4>{{post.title}}.</h4>
+    <p>{{post.content}}.</p>
+
+    <p>Categoría: 
+    {% for category in post.category.all %}
+        | {{category.name}} |
+    {% endfor %}
+    </p>
+
+    <p>Subido Por: <strong>{{post.author}}.</strong></p>
+    <p>{{post}}</p>
+    <br>
+{% endfor %}
+
+
+{% endblock %}
