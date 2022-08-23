@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Resultados de {{query}}.{% endblock %}
+
+{% block content %}
+
+    <p>Estás buscando: <strong>{{query}}</strong>.</p>
+
+    {% if articles %}
+        <p>Artículos Encontrados: {{articles|length}} artículos</p>
+        <ul>
+            {% for article in articles %}
+                <li>{{article.name}} | Sección: {{article.section}}. | Precio: {{article.price}}$</li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No hay resultados en tu búsqueda. 😥</p>
+
+    {% endif %}
+
+{% endblock %}
