@@ -1,0 +1,19 @@
+<div id='pages'>
+    <!--Info Página Actual-->
+    <p id='pages-info'>Página {{mangas_pages.number}} de {{mangas_pages.paginator.num_pages}}.</p>
+
+    <!--Página Previa o Primera-->
+    {% if mangas_pages.has_previous %}
+        <p>    
+            <a href="?page=1">&laquo;Primero</a>                
+            <a href="?page={{mangas_pages.previous_page_number}}">&laquo;Anterior |</a>
+    {% endif %}
+
+    <!--Página Siguiente o Última-->
+    {% if mangas_pages.has_next %}
+        <a href="?page={{mangas_pages.next_page_number}}">Siguiente&raquo;</a> 
+        <a href="?page={{mangas_pages.paginator.num_pages}}">&raquo; Último</a>           
+    </p>
+    {% endif %}
+
+</div>

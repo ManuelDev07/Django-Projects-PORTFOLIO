@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block title %}Mi Carrito de Compras{% endblock %}
+
+{% block content %}
+    <div id='cart-body'>
+        <h3>Mi Carrito</h3>
+
+        <!--Cart List-->
+        <div id='cart-table'>    
+
+            <!--Flash Message-->
+            {% if messages %}
+                {% for message in messages %}
+                    <div>{{message}}</div>
+                {% endfor %}
+            {% endif %}            
+            
+            {% if user.username %}
+                <!--Columnas del carrito-->
+                <div id='name-prod'>
+                    <h4>Producto(s)</h4>
+                    {% if request.session.cart.items %}
+                        {% for key, value in request.session.cart.items %}
+                            <p>
+                                {{value.name}}
+                                <!--Botón para eliminar el producto del carrito-->
+                                <a id='delete' href="{% url 'eliminar' value.product_id %}"><strong>Eliminar</strong></a>
+                            </p>
+                        {% endfor %}
+                </div>
+
+                <div id='quantity-prod'>
+                    <h4>Cantidad</h4>
+                    {% for key, value in request.session.cart.items %}
+                        <p>{{value.quantity}} 
+                        <!--Botones para aumentar o disminuir la cantidad de productos-->
+                        <a id='bplus' href=" {% url 'agregar_en_pagina' value.product_id %} ">+</a>
+                        <a id='bless' href=" {% url 'restar' value.product_id %} ">-</a>
+                    {% endfor %}
+                </div>
+                
+                <div id='price-prod'>
+                    <h4>Precio</h4>
+                    {% for key, value in request.session.cart.items %}
+                        <p>{{value.price|floatformat:2}} $</p>
+                    {% endfor %}
+                </div>  
+                            
+                    {% else %}
+                        <div='cart'><p>Carrito de Compras Vacío!</p></div>
+
+                    {% endif %}
+                
+                {% comment "Variabe global context_processor" %}{% endcomment %}
+                <div id='total-price'>
+                    <h4>Total: {{total_price|floatformat:2}}$</h4>
+                </div>
+
+            </div>
+
+            <!--Botón para realizar el pedido-->
+            {% comment "Verifico si hay artículos o no para mostrar el botón" %}{% endcomment %}
+            {% if request.session.cart.items %}
+                <div id='make-order'><a href="#"><strong>Realizar Compra</strong></a></div> {% comment %}Se redirecciona a la URL del urls.py de OrdersApp{% endcomment %}
+            {% endif %}
+
+            <!--Botón para limpiart el carro-->
+            <div id='clean-cart'><a href={% url 'limpiar_carrito' %}><strong>Limpiar Carrito</strong></a></div>            
+
+            {% else %}
+                <div id='error-message'><p><strong>Debes Logearte para Realizar tus Compras!</strong></p></div>
+
+            {% endif %}
+
+    </div>
+
+
+
+{% endblock %}
