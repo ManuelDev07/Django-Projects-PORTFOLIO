@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block title %}Publicaciones de {{title|title}}{% endblock  %}
+
+{% block content %}
+<div>
+    <div> Categorías
+        <ul>
+            {% for category in categories %}
+                <li><a href="{% url 'category_posts' category.slug%}">{{category}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div> Consolas
+        <ul>
+            {% for console_game in consoles %}
+                <li><a href="{% url 'consoles_posts' console_game.slug%}">{{console_game}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <hr>
+
+    <div> 
+        <h2>Publicaciones de {{title|title}}</h2>
+
+        <!--Botón crear publicación-->
+        {% if user.username %} {% comment "" %}Si el usuario está logeado podrá publicar, sino solo se limitará a observar {% endcomment %}
+            <a href="{% url 'create_post' %}">Crear Publicación</a>
+        {% endif %}       
+        
+        {% if posts %}
+            <div>
+                {% for post in posts %}
+                
+                    {% if user.username %} {% comment "" %}Si el usuario está logeado podrá acceder a las publicaciones en detalle {% endcomment %}
+                        <p><a href="{% url 'detailed_post' post.slug post.pk %}">{{post.title}}</a></p>
+                    {% else %}
+                        <p>{{post.title}}</p>
+                    {% endif %}    
+
+                    <p>{{post.content}}</p>
+                    <p>{{post.up_voted.all|length}}<a href="{% url 'likes' post.id %}">like</a></p>
+                    <p>{{post.down_voted.all|length}}<a href="{% url 'dislikes' post.id %}">dislike</a></p>
+                                        
+                    <p>
+                        {% for category in post.category.all %}
+                            <a href="{% url 'category_posts' category.slug%}">{{category}}</a> |
+                        {% endfor %}
+                    </p>
+
+                    <p>
+                        {% for genre in post.genre.all %}
+                            <a href="{% url 'genre_posts' genre.slug%}">{{genre}}</a> |
+                        {% endfor %}
+                    </p>
+                    
+                    <p>
+                        {% for console_game in post.console_name.all %}
+                            <a href="{% url 'consoles_posts' console_game.slug%}">{{console_game}}</a> |
+                        {% endfor %}
+                    </p>
+                    
+                    <p>Publicado por: {{post.posted_by}}</p>
+                    <p>Publicado el: {{post.created_at}}</p>
+
+                {% endfor %}
+            </div>
+            
+        {% else %}
+            <p>No hay Publicaciones! Se el primero en publicar algo.</p>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock  %}
+

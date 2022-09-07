@@ -1,0 +1,52 @@
+{% comment "se cargan los ficheros static" %}{% endcomment %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css\styles.css' %} ">
+    <title>Blog Juegos | {% block title %}{% endblock  %}</title>
+</head>
+<body>
+    <div>
+        <!--Menú Superior-->
+        <div id='menu-upper'>
+            
+            <!--Titulo-->
+            <div id='menu-upper-title'>
+                <h1 id='title'><a href="{% url 'all_posts' %}">Blog Juegos</a></h1>
+            </div>
+
+            <!--Menú de usuarios-->
+            <div id='menu-upper-users'>    
+                <ul>
+                    {% if user.email %}
+                        <li>Hola! {{user.username|upper}}</li>
+                        <li><a href={% url 'logout_user' %}>Cerrar Sesión</a></li>
+                    {% else %}
+                        <li><a id='login' href={% url 'login_user' %}>Iniciar Sesión</a></li>
+                        <li><a id='register' href={% url 'register_user' %}>Crear Cuenta</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!--Casilla de Búsqueda-->
+            <div id='menu-upper-search'>
+                <input type="search" name='search' placeholder='Buscar...'>
+            </div>
+
+        </div>
+    </div>
+
+    <!--contenido-->
+    <div id='content'>
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+</body>
+</html>

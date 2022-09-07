@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock  %}
+
+{% block content %}
+<div>
+    {% comment "" %}Si el usuario está logeado se mostrará el contenido de la página{% endcomment %}
+    {% if user.username %}
+        <div>
+            <p>Publicado por {{post.posted_by}}</p>
+            <p>{{post.title}}</p>
+
+            <p>
+                {% for category in post.category.all %}
+                    <a href="{% url 'category_posts' category.slug%}">{{category}}</a> |
+                {% endfor %}
+            </p>
+
+            {% if post.image %}
+                <img src='{{post.image.url}}' height='400' width='230'/>
+            {% endif %}
+            
+            <p>{{post.content}}</p>
+
+            <p>
+                {% for genre in post.genre.all %}
+                    <a href="{% url 'genre_posts' genre.slug%}">{{genre}}</a> |
+                {% endfor %}
+            </p>
+            <p>
+                {% for console_name in post.console_name.all %}
+                    <a href="{% url 'consoles_posts' console_name.slug%}">{{console_name}}</a> |
+                {% endfor %}
+            </p>
+            <p>Publicado el {{post.created_at}}</p>
+        </div>
+        
+        <!--Botón eliminar post-->
+        <a href="{% url 'delete_post' post.slug%}">Eliminar Publicación</a>
+
+        <!--Mensaje de comentario creado-->
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{message}}</div>
+            {% endfor %}
+        {% endif %}
+        
+        <!--Sección de Comentarios-->
+        <div id='comments-section'>
+            {% include 'widgets\comments.html' %}
+        </div>
+
+    {% else %}
+        <p>Para poder acceder a este sitio necesitas estar registrado.</p>
+        <p id='spam'>¿No tienes una cuenta? Haz <a href={% url 'register_user' %}>click aquí</a> para crearte una.</p>
+    {% endif %}
+</div>
+{% endblock  %}
+

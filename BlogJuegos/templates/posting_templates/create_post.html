@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}Crear Publicación{% endblock  %}
+
+{% block content %}
+    <!--title-->
+    <h2>Crear Publicación:</h2>
+
+    <!--Formulario-->
+    <form method='POST'>
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <!--Botón de publiación-->
+        <input type="submit" value="Publicar" />
+    </form>
+{% endblock  %}

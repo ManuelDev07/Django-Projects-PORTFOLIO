@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+
+{% block title %}Todas las Publicaciones{% endblock  %}
+
+{% block content %}
+<div class='grid'>
+    <div class='communities'> 
+        <!--Banner-->
+        <div class='banner'>
+            <h4>Comunidades</h4>
+        </div>
+
+        <ul>
+            {% for category in categories %}
+                <li><a href="{% url 'category_posts' category.slug%}">{{category}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class='trends'>
+        <!--Banner-->
+        <div class='banner'>
+            <h4>Tendencias</h4>
+        </div>
+        
+        <ul>
+            {% for console_game in consoles %}
+                <li><a href="{% url 'consoles_posts' console_game.slug%}">{{console_game}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!--Mensaje de creación de Publicación-->
+    {% if messages %}
+        {% for message in messages %}
+            <div id='good-message'>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+    
+    <!--Botón crear publicación-->
+    {% if user.username %} {% comment "" %}Si el usuario está logeado podrá publicar, sino solo se limitará a observar {% endcomment %}
+        <div id='posts-create'>
+            <p>Esta es tu página principal de Reddit. </p>
+            <p>Úsala para ponerte al día sobre tus</p> 
+            <p>comunidades favoritas.</p>
+            <a id='posts-create-bttn' href="{% url 'create_post' %}">Crear Publicación</a>
+        </div>
+    {% endif %}
+
+
+   <div class='posts'>       
+       <!--Listado de Posts-->
+       {% if posts %}
+           <div>
+                {% for post in posts %}
+                
+                    {% if user.username %} {% comment "" %}Si el usuario está logeado podrá acceder a las publicaciones en detalle {% endcomment %}
+                        <p><a href="{% url 'detailed_post' post.slug post.pk %}">{{post.title}}</a></p>
+                    {% else %}
+                        <p>{{post.title}}</p>
+                    {% endif %}
+
+                   <p>{{post.content}}</p>
+                   <p>{{post.up_voted.all|length}}<a href="{% url 'likes' post.id %}">like</a></p>
+                   <p>{{post.down_voted.all|length}}<a href="{% url 'dislikes' post.id %}">dislike</a></p>
+                   
+                   <p>
+                       {% for category in post.category.all %}
+                           <a href="{% url 'category_posts' category.slug%}">{{category}}</a> |
+                       {% endfor %}
+                   </p>
+
+                   <p>
+                       {% for genre in post.genre.all %}
+                           <a href="{% url 'genre_posts' genre.slug%}">{{genre}}</a> |
+                       {% endfor %}
+                   </p>
+                   
+                   <p>
+                       {% for console_name in post.console_name.all %}
+                           <a href="{% url 'consoles_posts' console_name.slug%}">{{console_name}}</a> |
+                       {% endfor %}
+                   </p>
+                   
+                   <p>Publicado por {{post.posted_by}}</p>
+                   <p>Publicado el {{post.created_at}}</p>
+
+               {% endfor %}
+           </div>
+
+       {% else %}
+           <p>No hay Publicaciones! Se el primero en publicar algo.</p>
+       {% endif %}
+   </div>
+</div>
+{% endblock  %}
+

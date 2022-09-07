@@ -1,0 +1,22 @@
+<!--Widget para la caja de comentarios-->
+<!--Formulario para comentar la publicación-->
+<form method='POST'>
+    {% csrf_token %}
+
+    {{form}}
+    <input type='submit' value='Comentar' />
+
+</form>
+
+<!--Listado de TODOS los comentarios de la Publicación-->
+<h3>Comentarios</h3>
+
+{% if comments_posted %}
+    {% for comment in comments_posted %}
+        <div>
+            {{comment}} - {{comment.commented_by}}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Esta publicación aún no tiene comentarios. Sé el primero!</p>
+{% endif %}
