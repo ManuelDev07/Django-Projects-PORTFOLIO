@@ -22,8 +22,8 @@ There's six projects/websites plus the principal blog one (thats incomplete at t
 <p> The classic To-Do List project, where the user will be able to store their tasks, manage all the tasks (delete it or complete it), see which ones they have eliminated and completed and/or permanently delete it from the project database.</p>
 <img src='https://user-images.githubusercontent.com/99824291/186222621-c2df85ca-c0f8-4d96-adb9-0e2499657288.gif' width='720' height='400' />
 
-<h2>6) BlogDeNotas:</h2> 
-<p>its going to be an app that uses auth for users so each one can create an account and save their notes. And can see the others notes as well too.</p>
+<h2>6) BlogJuegos:</h2> 
+<p>The main idea of this project was the creation of a Reddit Clone, with a system of users, likes and dislikes, comments on posts, follows, create posts, etc. It's still the same structure as Reddit, but it's a video game-themed blog now.</p>
 
 <h2>7) TiendaOnline:</h2> 
 <p>the first app where i used to create some things for my final project. Studying and guiding from youtube courses.<strong>(Experimental project)</strong></p>
